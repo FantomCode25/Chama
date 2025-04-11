@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DeepQuest: Intelligent Synthesis & Markdown Output 🔍🤖
 
-## Getting Started
+[![Next.js](https://img.shields.io/badge/Next.js-13.5+-000000?logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.2+-3178C6?logo=typescript)](https://www.typescriptlang.org/)
+[![PNPM](https://img.shields.io/badge/pnpm-8.x+-F69220?logo=pnpm)](https://pnpm.io/)
 
-First, run the development server:
+An AI-powered research assistant that generates comprehensive reports with visualizations using RAG architecture and multi-model intelligence.
+
+
+
+![image](https://github.com/user-attachments/assets/4bb3b477-041b-4301-9372-75c47a4405b0)
+
+
+
+![image](https://github.com/user-attachments/assets/09c3de70-6e9c-488d-8c00-bcd78762e763)
+
+
+
+[Link to diagrams](https://excalidraw.com/#json=FpZpLCIPMwDaXG4fR2RZL,wkmPKRKKAT_55XlcsuiALQ)
+
+
+
+## Features ✨
+
+- **Multi-Model AI** (OpenAI, Gemini, OpenRouter)
+- **RAG Architecture** with vector similarity search
+- **Smart Web Search** (EXA API integration)
+- **Real-time Progress Tracking**
+- **AI-generated Visualizations** (Charts/Diagrams)
+- **Hybrid Caching System** (Redis + in-memory)
+- **Research History & Persistence**
+
+## Getting Started 🚀
+
+### Prerequisites
+
+- Node.js 18+
+- PNPM 8.x+
+- Neon PostgreSQL Database
+- Redis instance (recommend Upstash)
+- API keys for:
+  - OpenAI
+  - Google Cloud
+  - EXA
+  - OpenRouter
+
+### Tech Stack 📚
+
+**Frontend:** Next.js 14, TypeScript, Tailwind CSS, Shadcn/ui   
+**AI Core:**	OpenAI, Gemini, OpenRouter, LangChain.js   
+**Vector DB:**	Neon PostgreSQL + pgvector   
+**Caching:**	Redis (Upstash), node-cache   
+**Visualization:**	Mermaid.js, Chart.js, D3.js   
+**APIs:**	Exa, Google Vision, Next.js API Routes   
+**Auth:**	Next-Auth   
+**State:**	Zustand   
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-org/deep-research-ai.git
+cd deep-research-ai
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Configuration ⚙️
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create .env.local file:
+```bash
+# Database
+POSTGRES_URL="neon://user:password@ep-cool-cloud-123456.us-east-2.aws.neon.tech/main"
+REDIS_URL="redis://default:password@usw2-cool-redis-12345.upstash.io:6379"
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# AI Providers
+OPENAI_API_KEY="sk-..."
+GOOGLE_API_KEY="ai-..."
+EXA_API_KEY="..."sa
 
-## Learn More
+# Auth (configure your auth provider)
+NEXTAUTH_SECRET="your-secret"
+NEXTAUTH_URL="http://localhost:3000"
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Contributing 🤝
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Fork the repository   
+2. Create feature branch: git checkout -b feat/amazing-feature   
+3. Commit changes: git commit -m 'feat: add amazing feature'   
+4. Push to branch: git push origin feat/amazing-feature   
+5. Open pull request   
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### License 📄
+MIT License - See LICENSE for details.    
 
-## Deploy on Vercel
+### Happy Researching! 🧠🔬
+This project is maintained by Team Chama.   
+[Email me](mailto:abhinabdas004@gmail.com)   
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
