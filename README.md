@@ -6,6 +6,10 @@
 
 An AI-powered research assistant that generates comprehensive reports with visualizations using RAG architecture and multi-model intelligence.
 
+### Demo (YouTube Link): 
+
+[![Deep Research AI Agent Demo](https://img.youtube.com/vi/197l6zDGWpg/0.jpg)](https://www.youtube.com/watch?v=197l6zDGWpg)
+
 
 
 ![image](https://github.com/user-attachments/assets/4bb3b477-041b-4301-9372-75c47a4405b0)
