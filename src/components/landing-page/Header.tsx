@@ -6,7 +6,7 @@ import { useTheme } from "next-themes"
 import { motion } from "framer-motion"
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline"
 import Image from "next/image";
-import HeaderCreative from "../../public/HeaderCreative.png"
+import HeaderCreative from "../../../public/HeaderCreative.png"
 
 export default function Header() {
   const [mounted, setMounted] = useState(false)
