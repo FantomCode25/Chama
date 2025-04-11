@@ -1,14 +1,39 @@
 # DeepQuest: Intelligent Synthesis & Markdown Output 🔍🤖
-
 [![Next.js](https://img.shields.io/badge/Next.js-13.5+-000000?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.2+-3178C6?logo=typescript)](https://www.typescriptlang.org/)
 [![PNPM](https://img.shields.io/badge/pnpm-8.x+-F69220?logo=pnpm)](https://pnpm.io/)
 
-An AI-powered research assistant that generates comprehensive reports with visualizations using RAG architecture and multi-model intelligence.
+**Team Name:** _CHAMA_  
+**Hackathon:** _FANTOMCODE 2025_  
+**Date:** _12/4/2025_ 
 
-### Demo (YouTube Link): 
+### 🧠 Introduction  
+Intelligent Synthesis & Markdown Output is a multimodal research assistant that helps users generate accurate, transparent, and visually-rich research reports. Designed for students, professionals, and analysts, it combines the power of LLMs, smart web search, and image analysis to automate complex research workflows. By shifting the burden of data gathering to AI, users can focus on insights and decision-making.
 
-[![Deep Research AI Agent Demo](https://img.youtube.com/vi/197l6zDGWpg/0.jpg)](https://www.youtube.com/watch?v=197l6zDGWpg)
+
+### ❗ Problem Statement
+
+In today's fast-paced digital world, conducting in-depth research is often slow, fragmented, and lacks transparency. Existing AI tools typically fail to show how answers are formed, rely on outdated or unverifiable sources, and lack support for image-based analysis. Moreover, these tools are rarely scalable or optimized for real-time use, making them unreliable for serious research tasks. There's a pressing need for an intelligent, multimodal, and explainable system that streamlines the research process while ensuring trust, clarity, and efficiency.
+
+### ✅ Solution Overview  
+
+Our solution is a transparent and scalable AI research agent that mimics human research behavior. It uses clarifying questions, smart RAG (retrieval-augmented generation), image understanding, and dynamic visualizations to build comprehensive markdown reports. Key features include:  
+
+🔍 Source Transparency with citation tracking  
+
+🧠 Agentic AI Planning for step-by-step task execution  
+
+🌐 Multimodal Input (text + image)  
+
+⚡ Hybrid Caching (Redis + in-memory) for real-time speed  
+
+📊 Visualizations using Mermaid, Chart.js, and D3.js  
+
+💾 Export-ready reports with GitHub-based editing (WIP MCP)  
+
+### Demo (YouTube Link):   
+
+[![Deep Research AI Agent Demo](https://img.youtube.com/vi/197l6zDGWpg/0.jpg)](https://www.youtube.com/watch?v=197l6zDGWpg)  
 
 
 
@@ -71,18 +96,39 @@ pnpm install
 
 Create .env.local file:
 ```bash
-# Database
-POSTGRES_URL="neon://user:password@ep-cool-cloud-123456.us-east-2.aws.neon.tech/main"
-REDIS_URL="redis://default:password@usw2-cool-redis-12345.upstash.io:6379"
+# Clerk Authentication
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_publishable_key
+CLERK_SECRET_KEY=your_secret_key
 
-# AI Providers
-OPENAI_API_KEY="sk-..."
-GOOGLE_API_KEY="ai-..."
-EXA_API_KEY="..."sa
+# Clerk URLs
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 
-# Auth (configure your auth provider)
-NEXTAUTH_SECRET="your-secret"
-NEXTAUTH_URL="http://localhost:3000"
+# Exa Search API Key
+EXA_SEARCH_API_KEY=your-exa-search-api-key
+EXA_SEARCH_API_BASE_URL=https://api.exa.ai
+
+# Neon Database Connection
+NEON_DATABASE_URL=postgres://username:password@ep-example.neon.tech/database?sslmode=require
+
+# OpenAI API Keys
+OPENAI_API_KEY=your-openai-api-key
+
+# Google API Keys
+GEMINI_API_KEY=your-gemini-api-key
+GOOGLE_APPLICATION_CREDENTIALS=path-to-credentials.json
+GOOGLE_CLOUD_PROJECT=your-cloud-project-id
+NEXT_PUBLIC_ENABLE_VISUAL_CONTENT=true
+
+# OpenRouter API Key
+OPENROUTER_API_KEY=your-openrouter-api-key
+
+# Cache settings (Redis optional)
+CACHE_TTL=86400
+REDIS_URL=redis://localhost:6379
+USE_REDIS_CACHE=false
 ```
 
 ### Contributing 🤝
