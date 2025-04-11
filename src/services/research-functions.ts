@@ -300,13 +300,10 @@ export async function analyzeImages(
   try {
     activityTracker.add("image-analysis", "pending", `Analyzing ${images.length} uploaded images`);
 
-    // Attempt to process all images using a single model call to handle the Vision API results
     try {
-      // Use the provider specified in researchState
       const provider = researchState.provider || "google";
       console.log(`Using provider ${provider} for image analysis`);
 
-      // Select appropriate model based on provider
       let modelToUse;
       if (provider === "google") {
         modelToUse = GOOGLE_MODELS.ANALYSIS;
@@ -315,7 +312,6 @@ export async function analyzeImages(
       } else if (provider === "openrouter") {
         modelToUse = OPENROUTER_MODELS.ANALYSIS;
       } else {
-        // Hybrid or fallback - use Google for image analysis
         modelToUse = GOOGLE_MODELS.ANALYSIS;
       }
 
@@ -341,7 +337,6 @@ export async function analyzeImages(
       console.error("Error in batch image analysis:", error);
       activityTracker.add("image-analysis", "warning", "Batch image analysis failed, trying individual images");
 
-      // Individual image fallback approach
       for (let i = 0; i < images.length; i++) {
         const image = images[i];
         const imageName = image.name || `Image ${i + 1}`;
@@ -349,15 +344,14 @@ export async function analyzeImages(
         try {
           activityTracker.add("image-analysis", "pending", `Processing image: ${imageName}`);
 
-          // Fall back to Google for individual image analysis
           const result = await callModel(
             {
-              model: GOOGLE_MODELS.ANALYSIS,  // Force Google for individual analysis as fallback
+              model: GOOGLE_MODELS.ANALYSIS,
               prompt: `Analyze this image in the context of the research topic: ${researchState.topic}`,
               system: "You are an expert image analyst. Extract as much information as possible from this image.",
               images: [image],
               activityType: "image-analysis",
-              provider: "google"  // Force Google provider for fallback
+              provider: "google"
             },
             researchState, activityTracker
           );
@@ -379,7 +373,7 @@ export async function analyzeImages(
   } catch (error) {
     activityTracker.add("image-analysis", "error", "Failed to analyze images");
     console.error("Error in image analysis:", error);
-    return findings; // Return any findings we might have collected before the error
+    return findings;
   }
 }
 
@@ -405,7 +399,6 @@ export async function generateReport(researchState: ResearchState, activityTrack
 
     console.log(`Generating report with ${provider} provider using model: ${modelConfig}`);
 
-    // Check if visualizations are requested
     if (researchState.visualizations?.enabled) {
       console.log(`Including visualizations in report: ${researchState.visualizations.type}`);
       activityTracker.add("generate", "info", `Adding ${researchState.visualizations.type} visualizations to the report`);
