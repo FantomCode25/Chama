@@ -15,7 +15,6 @@ import { Button } from "@/components/ui/button";
 const RetrievedDocuments = () => {
   const { retrievedDocuments, isLoading, useRAG } = useDeepResearchStore();
 
-  // Don't show if there are no documents or RAG is disabled
   if (!useRAG || retrievedDocuments.length === 0) return null;
 
   return (
@@ -49,7 +48,6 @@ const RetrievedDocuments = () => {
 };
 
 const DocumentCard = ({ document }: { document: RagDocument }) => {
-  // Format similarity score as percentage if it exists
   const similarityText = document.similarity
     ? `${(document.similarity * 100).toFixed(1)}% relevant`
     : "Relevant document";

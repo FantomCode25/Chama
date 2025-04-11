@@ -22,7 +22,6 @@ const ResearchReport = () => {
   const { report, isCompleted, isLoading, topic, visualizationOptions } = useDeepResearchStore();
   const [processedReport, setProcessedReport] = useState("");
 
-  // Function to extract code blocks by type
   const extractCodeBlocks = (markdown: string, language: string) => {
     if (!markdown) return [];
     const regex = new RegExp(`\`\`\`${language}([\\s\\S]*?)\`\`\``, 'g');
@@ -39,14 +38,12 @@ const ResearchReport = () => {
     return blocks;
   };
 
-  // Get the clean report content
   const cleanReport = useMemo(() => {
     if (!report) return "";
     const parts = report.split("<report>");
     return parts.length > 1 ? parts[1].split("</report>")[0] : report;
   }, [report]);
 
-  // Process the report to replace code blocks with placeholders for visualization
   useEffect(() => {
     if (!cleanReport || !visualizationOptions.enabled) {
       setProcessedReport(cleanReport);
@@ -73,43 +70,33 @@ const ResearchReport = () => {
     setProcessedReport(processedContent);
   }, [cleanReport, visualizationOptions]);
 
-  // Effect to render visualizations after markdown is processed
   useEffect(() => {
     if (!visualizationOptions.enabled || !processedReport) return;
 
-    // Find all placeholder divs and replace with visualizations
     document.querySelectorAll('div[id^="mermaid-placeholder-"], div[id^="chartjs-placeholder-"], div[id^="d3-placeholder-"]').forEach(placeholder => {
       const type = placeholder.getAttribute('data-type');
       const content = decodeURIComponent(placeholder.getAttribute('data-content') || '');
       const id = placeholder.id;
 
       if (type && content) {
-        // Create visualization container
         const container = document.createElement('div');
         container.className = "my-6 bg-white/80 rounded-lg border border-gray-200 shadow-sm";
 
-        // Create visualization
         const visualization = document.createElement('div');
         visualization.id = `visualization-${id}`;
         container.appendChild(visualization);
 
-        // Replace placeholder with container
         placeholder.parentNode?.replaceChild(container, placeholder);
 
-        // Render visualization
         const visualizationElement = document.getElementById(`visualization-${id}`);
         if (visualizationElement) {
           const root = document.createElement('div');
           visualizationElement.appendChild(root);
 
-          // Use React to render the component
           const visualRenderer = document.createElement('div');
           visualRenderer.className = "w-full";
           root.appendChild(visualRenderer);
 
-          // We need to manually create and append the visualization renderer
-          // In a real implementation, you'd use ReactDOM.render() here
-          // For this code fix, we'll simulate by adding a custom data attribute
           visualRenderer.setAttribute('data-render-visualization', 'true');
           visualRenderer.setAttribute('data-type', type);
           visualRenderer.setAttribute('data-content', content);
@@ -149,7 +136,6 @@ const ResearchReport = () => {
 
   if (report.length <= 0) return null;
 
-  // Modified component to directly render visualizations inline
   return (
     <Card
       className="max-w-[90vw] xl:max-w-[60vw] relative px-4 py-6 rounded-xl border-black/10 border-solid shadow-none p-6
@@ -174,10 +160,9 @@ const ResearchReport = () => {
               const match = /language-(\w+)/.exec(className || "");
               const language = match ? match[1] : "";
 
-              // For visualization code blocks, we'll render a placeholder that will be replaced by actual visualizations
               if (!inline && visualizationOptions.enabled) {
                 const visualizationType =
-                  language === 'html' ? 'd3' : // Detect HTML blocks as D3
+                  language === 'html' ? 'd3' :
                     language === 'chartjs' ? 'chartjs' :
                       language === 'mermaid' ? 'mermaid' : null;
 

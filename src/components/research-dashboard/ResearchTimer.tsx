@@ -9,14 +9,13 @@ function ResearchTimer() {
   const [elapsedTime, setElapsedTime] = useState(0)
 
   useEffect(() => {
-    // Reset elapsed time when activities are reset
     if (activities.length <= 0) {
       setElapsedTime(0);
       return;
     }
-    
+
     if (report.length > 10) return;
-    
+
     const startTime = Date.now()
     const timer = setInterval(() => {
       setElapsedTime(Date.now() - startTime)
@@ -37,5 +36,5 @@ function ResearchTimer() {
       </p>
     </Card>
   )
-} 
+}
 export default ResearchTimer

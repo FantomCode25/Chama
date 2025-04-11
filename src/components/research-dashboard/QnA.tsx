@@ -29,7 +29,7 @@ const QnA = () => {
   } = useDeepResearchStore();
 
   const { append, data, isLoading } = useChat({
-    api: "/api/deep-research",
+    api: "/api/agentic-ai-workflow",
   });
 
   useEffect(() => {

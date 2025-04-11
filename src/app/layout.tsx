@@ -2,7 +2,7 @@
 import type { Metadata } from "next/types";
 import { Dancing_Script, Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/landing-page/theme-provider"
 import { dark, shadesOfPurple } from '@clerk/themes';
 import "./globals.css";
 

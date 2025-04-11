@@ -10,15 +10,12 @@ import bg from "../../public/background.png";
 export default function Home() {
   const { userId } = auth();
 
-  // If user is not authenticated, show the public landing page
   if (!userId) {
     return <LandingPage />;
   }
 
-  // Show research component for authenticated users
   return (
     <main className="min-h-screen w-full flex flex-col items-center justify-start gap-8 py-16 relative text-black">
-      {/* Fixed background image */}
       <div className="fixed inset-0 -z-10">
         <Image
           src={bg}
@@ -31,7 +28,6 @@ export default function Home() {
         <div className="absolute inset-0 bg-white/40"></div>
       </div>
 
-      {/* Header with UserButton */}
       <header className="w-full container mx-auto px-4 py-4 absolute top-0 left-0 right-0 z-20">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
@@ -44,7 +40,6 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Subtle gradient overlay (will show even if image fails) */}
       <div className="fixed inset-0 -z-5 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-b from-purple-100 to-transparent rounded-full blur-3xl opacity-50"></div>
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-t from-indigo-100 to-transparent rounded-full blur-3xl opacity-50"></div>
@@ -59,7 +54,6 @@ export default function Home() {
         </p>
       </div>
 
-      {/* Force light theme for input components */}
       <div className="light w-full max-w-4xl">
         <UserInput />
         <QnA />

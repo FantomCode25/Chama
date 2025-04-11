@@ -80,7 +80,6 @@ const UserInput = () => {
       const newFiles = Array.from(files);
       setUploadedImages(prev => [...prev, ...newFiles]);
 
-      // Generate preview URLs
       const newPreviewUrls = newFiles.map(file => URL.createObjectURL(file));
       setUploadPreviewUrls(prev => [...prev, ...newPreviewUrls]);
     }
@@ -89,7 +88,6 @@ const UserInput = () => {
   const removeImage = (index: number) => {
     setUploadedImages(prev => prev.filter((_, i) => i !== index));
 
-    // Revoke the object URL to avoid memory leaks
     URL.revokeObjectURL(uploadPreviewUrls[index]);
     setUploadPreviewUrls(prev => prev.filter((_, i) => i !== index));
   };
@@ -101,7 +99,6 @@ const UserInput = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     try {
-      // Set the selected providers in the store
       setSelectedProvider(values.modelProvider as ModelProvider);
       setSelectedEmbeddingProvider(values.embeddingProvider as EmbeddingProvider);
       setUseRAG(values.useRAG);
@@ -115,7 +112,6 @@ const UserInput = () => {
       console.log(`RAG enabled: ${values.useRAG}`);
       console.log(`Visualizations enabled: ${values.useVisualizations} (type: ${values.visualizationType})`);
 
-      // Process images if any
       const imageData: { base64: string, name: string, type: string }[] = [];
 
       if (uploadedImages.length > 0) {
@@ -129,10 +125,9 @@ const UserInput = () => {
         }
       }
 
-      // Store image data in the state
       setUploadedImageData(imageData);
 
-      const response = await fetch("/api/generate-questions", {
+      const response = await fetch("/api/ask-queries", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -161,7 +156,6 @@ const UserInput = () => {
         visualizationType: values.visualizationType,
       });
 
-      // Clear images after submission
       setUploadedImages([]);
       setUploadPreviewUrls([]);
     } catch (error) {
@@ -177,7 +171,6 @@ const UserInput = () => {
       reader.readAsDataURL(file);
       reader.onload = () => {
         if (typeof reader.result === 'string') {
-          // Remove the data:image/jpeg;base64, part
           const base64 = reader.result.split(',')[1];
           resolve(base64);
         } else {
@@ -191,7 +184,6 @@ const UserInput = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6 w-full max-w-4xl mx-auto px-4">
-        {/* Input field and submit button */}
         <div className="flex flex-col sm:flex-row items-center gap-3 w-full">
           <FormField
             control={form.control}
@@ -274,9 +266,7 @@ const UserInput = () => {
           </div>
         )}
 
-        {/* Advanced options section - Improved grid for better layout */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 rounded-xl bg-white/50 backdrop-blur-sm p-5 border border-black/5 shadow-sm">
-          {/* Model provider */}
           <FormField
             control={form.control}
             name="modelProvider"
@@ -304,7 +294,6 @@ const UserInput = () => {
             )}
           />
 
-          {/* Embedding provider */}
           <FormField
             control={form.control}
             name="embeddingProvider"
@@ -330,7 +319,6 @@ const UserInput = () => {
             )}
           />
 
-          {/* RAG toggle */}
           <FormField
             control={form.control}
             name="useRAG"
@@ -367,7 +355,6 @@ const UserInput = () => {
             )}
           />
 
-          {/* Visualization toggle & type */}
           <div className="space-y-2">
             <FormField
               control={form.control}
@@ -435,7 +422,6 @@ const UserInput = () => {
           </div>
         </div>
 
-        {/* Indicator badges */}
         {(uploadedImages.length > 0 || form.watch("useRAG") || form.watch("useVisualizations")) && (
           <div className="flex flex-wrap justify-center gap-2 mt-1">
             {uploadedImages.length > 0 && (

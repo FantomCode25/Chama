@@ -5,7 +5,7 @@ import Chart from 'chart.js/auto';
 import * as d3 from 'd3';
 
 interface VisualizationRendererProps {
-  type: string;  // 'mermaid', 'chartjs', 'd3'
+  type: string;
   content: string;
   id: string;
 }
@@ -13,33 +13,29 @@ interface VisualizationRendererProps {
 const VisualizationRenderer: React.FC<VisualizationRendererProps> = ({ type, content, id }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Update Mermaid initialization
   useEffect(() => {
     mermaid.initialize({
-      startOnLoad: false, // Disable auto-init
+      startOnLoad: false,
       theme: 'neutral',
       securityLevel: 'loose',
       fontFamily: 'inherit',
     });
   }, []);
 
-  // Render the appropriate visualization
   useEffect(() => {
     const renderVisualization = async () => {
       if (!containerRef.current) return;
 
       try {
-        // Clear previous content
         containerRef.current.innerHTML = '';
 
         if (type === 'mermaid') {
           const sanitizedContent = content
-            // Enhanced sanitization for nodes and links
-            .replace(/([\[{\(])([^\]]*?\([^\)]*?\)[^\]]*?)([\]}\)])/g, '$1"$2"$3') // Node labels with ()
-            .replace(/(-->|\|)([^"\n|]*?\([^)]*?\))(\|?)/g, '$1"$2"$3') // Link labels with ()
-            .replace(/(graph\s+[a-zA-Z]+)\s*$/gm, '$1;') // Ensure graph declaration
-            .replace(/\b(\w+)\b(?=\s*[\[{\(])/g, '$1_' + id) // Unique node IDs
-            .replace(/;(\s*[}\]\)])/g, '$1'); // Clean excess semicolons
+            .replace(/([\[{\(])([^\]]*?\([^\)]*?\)[^\]]*?)([\]}\)])/g, '$1"$2"$3')
+            .replace(/(-->|\|)([^"\n|]*?\([^)]*?\))(\|?)/g, '$1"$2"$3')
+            .replace(/(graph\s+[a-zA-Z]+)\s*$/gm, '$1;')
+            .replace(/\b(\w+)\b(?=\s*[\[{\(])/g, '$1_' + id)
+            .replace(/;(\s*[}\]\)])/g, '$1');
 
           const element = document.createElement('div');
           element.className = 'mermaid';
@@ -54,7 +50,6 @@ const VisualizationRenderer: React.FC<VisualizationRendererProps> = ({ type, con
                 querySelector: `#mermaid-${id}`,
                 suppressErrors: false,
               });
-              // Force redraw for layout issues
               window.dispatchEvent(new Event('resize'));
             });
           } catch (mermaidError) {
@@ -64,15 +59,12 @@ const VisualizationRenderer: React.FC<VisualizationRendererProps> = ({ type, con
         }
         else if (type === 'chartjs') {
           try {
-            // Parse Chart.js configuration
             const chartConfig = JSON.parse(content);
 
-            // Create canvas for Chart.js
             const canvas = document.createElement('canvas');
             canvas.id = `chart-${id}`;
             containerRef.current.appendChild(canvas);
 
-            // Create chart
             new Chart(canvas, chartConfig);
           } catch (parseError) {
             console.error('Failed to parse Chart.js config:', parseError);
@@ -86,10 +78,8 @@ const VisualizationRenderer: React.FC<VisualizationRendererProps> = ({ type, con
             containerRef.current.appendChild(d3Container);
 
             let jsCode = content;
-            // Replace common container IDs with our dynamic ID
             jsCode = jsCode.replace(/'#chart'|"#chart"|#chart/g, `#d3-${id}`);
 
-            // Handle script extraction
             if (content.includes('<script')) {
               const scriptRegex = /<script\b[^>]*>([\s\S]*?)<\/script>/g;
               let matches;
@@ -99,7 +89,6 @@ const VisualizationRenderer: React.FC<VisualizationRendererProps> = ({ type, con
               }
             }
 
-            // Create execution context
             const d3Function = new Function('d3', 'containerId', `
               try {
                 const container = d3.select(containerId);
@@ -132,11 +121,9 @@ const VisualizationRenderer: React.FC<VisualizationRendererProps> = ({ type, con
 
   // Add cleanup effect
   useEffect(() => {
-    // Store reference to containerRef.current
     const container = containerRef.current;
 
     return () => {
-      // Cleanup Chart.js instances using the stored reference
       if (container) {
         const charts = container.querySelectorAll('canvas');
         charts.forEach(chart => {
