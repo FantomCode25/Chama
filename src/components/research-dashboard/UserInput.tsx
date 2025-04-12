@@ -425,25 +425,25 @@ const UserInput = () => {
         {(uploadedImages.length > 0 || form.watch("useRAG") || form.watch("useVisualizations")) && (
           <div className="flex flex-wrap justify-center gap-2 mt-1">
             {uploadedImages.length > 0 && (
-              <Badge variant="outline" className="flex items-center gap-1 bg-white/60 px-3 py-1 text-xs">
+              <Badge variant="outline" className="flex items-center gap-1 bg-white/60 px-3 py-1 text-xs text-black">
                 <Upload className="h-3 w-3" />
                 {uploadedImages.length} image{uploadedImages.length > 1 ? 's' : ''}
               </Badge>
             )}
 
-            <Badge variant="outline" className="bg-white/60 px-3 py-1 text-xs capitalize">
+            <Badge variant="outline" className="bg-white/60 px-3 py-1 text-xs capitalize text-black">
               {form.watch("modelProvider")}
             </Badge>
 
             {form.watch("useRAG") && (
-              <Badge variant="outline" className="flex items-center gap-1 bg-white/60 px-3 py-1 text-xs">
+              <Badge variant="outline" className="flex items-center gap-1 bg-white/60 px-3 py-1 text-xs text-black">
                 <Database className="h-3 w-3" />
                 Knowledge Base
               </Badge>
             )}
 
             {form.watch("useVisualizations") && (
-              <Badge variant="outline" className="flex items-center gap-1 bg-white/60 px-3 py-1 text-xs">
+              <Badge variant="outline" className="flex items-center gap-1 bg-white/60 px-3 py-1 text-xs text-black">
                 <BarChart3 className="h-3 w-3" />
                 {form.watch("visualizationType") === "all" ? "All Visuals" : form.watch("visualizationType")}
               </Badge>

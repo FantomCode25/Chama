@@ -15,7 +15,7 @@ export const OPENAI_MODELS = {
   PLANNING: "gpt-4o-mini",
   EXTRACTION: "gpt-4o-mini",
   ANALYSIS: "gpt-4o-mini",
-  REPORT: "gpt-4o-mini"
+  REPORT: "gpt-4o"
 };
 
 export const GOOGLE_MODELS = {
@@ -29,5 +29,5 @@ export const HYBRID_MODELS = {
   PLANNING: "gemini-1.5-flash",
   EXTRACTION: "gpt-4o-mini",
   ANALYSIS: "gpt-4o-mini",
-  REPORT: "gemini-1.5-flash"
+  REPORT: "gpt-4o"
 };

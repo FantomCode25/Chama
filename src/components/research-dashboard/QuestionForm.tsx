@@ -55,15 +55,14 @@ const QuestionForm = () => {
 
 
   return (
-
-    <Card className='w-full  max-w-[90vw] sm:max-w-[80vw] xl:max-w-[50vw] shadow-none bg-white/60 backdrop-blur-sm border rounded-xl border-black/10 border-solid px-4 py-6'>
+    <Card className='w-full max-w-[90vw] sm:max-w-[80vw] xl:max-w-[50vw] shadow-none bg-white/60 backdrop-blur-sm border rounded-xl border-black/10 border-solid px-4 py-6'>
       <CardHeader className='px-4 sm:px-6'>
-        <CardTitle className='text-base text-primary/50'>
+        <CardTitle className='text-base text-black font-semibold'>
           Question {currentQuestion + 1} of {questions.length}
         </CardTitle>
       </CardHeader>
       <CardContent className='space-y-6 w-full px-4 sm:px-6'>
-        <p className='text-base'>{questions[currentQuestion]}</p>
+        <p className='text-base text-black font-medium'>{questions[currentQuestion]}</p>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
@@ -73,10 +72,10 @@ const QuestionForm = () => {
                 <FormItem>
                   <FormControl>
                     <Textarea placeholder="Type your answer here..." {...field}
-                      className='px-4 py-2 text-base resize-none placeholder:text-sm border-black/20'
+                      className='px-4 py-2 text-base text-black resize-none placeholder:text-gray-500 border-black/20'
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-600 font-medium" />
                 </FormItem>
               )}
             />

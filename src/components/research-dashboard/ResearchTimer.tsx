@@ -31,8 +31,8 @@ function ResearchTimer() {
 
   return (
     <Card className="p-2 bg-white/60 backdrop-blur-sm border border-black/10 border-solid shadow-none rounded">
-      <p className="text-sm text-muted-foreground">
-        Time elapsed: <span className="font-mono min-w-[55px] inline-block">{seconds > 60 ? `${Math.floor(seconds / 60)}m ${seconds % 60 > 0 ? `${(seconds % 60).toString().padStart(2, '0')}s` : ''}` : `${seconds}.${milliseconds.toString().padStart(3, '0')}s`}</span>
+      <p className="text-sm text-black font-medium">
+        Time elapsed: <span className="font-mono min-w-[55px] inline-block font-bold">{seconds > 60 ? `${Math.floor(seconds / 60)}m ${seconds % 60 > 0 ? `${(seconds % 60).toString().padStart(2, '0')}s` : ''}` : `${seconds}.${milliseconds.toString().padStart(3, '0')}s`}</span>
       </p>
     </Card>
   )

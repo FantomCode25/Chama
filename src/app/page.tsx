@@ -25,7 +25,7 @@ export default function Home() {
           quality={100}
           className="object-cover opacity-40"
         />
-        <div className="absolute inset-0 bg-white/40"></div>
+        <div className="absolute inset-0 bg-white/10"></div>
       </div>
 
       <header className="w-full container mx-auto px-4 py-4 absolute top-0 left-0 right-0 z-20">
